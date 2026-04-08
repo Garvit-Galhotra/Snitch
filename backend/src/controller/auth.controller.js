@@ -1,0 +1,35 @@
+import userModel from "../model/user.model.js";
+
+import jwt from "jsonwebtoken";
+
+import { Config } from "../config/config.js";
+
+async function sendTokenResponse(user) {
+  const token = jwt.sign({ id: user._id }, Config.JWT_SECRET, {
+    expiresIn: "1d",
+  });
+}
+
+export const register = async (req, res) => {
+  const { email, password, fullname, contact } = req.body;
+
+  try {
+    const existingUser = await userModel.findOne({
+      $or: [{ email }, { contact }],
+    });
+
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    const user = userModel.create({
+      email,
+      password,
+      fullName,
+      contact,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
