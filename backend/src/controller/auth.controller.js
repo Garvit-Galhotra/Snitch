@@ -6,8 +6,9 @@ import { Config } from "../config/config.js";
 
 async function sendTokenResponse(user) {
   const token = jwt.sign({ id: user._id }, Config.JWT_SECRET, {
-    expiresIn: "1d",
+    expiresIn: "7d",
   });
+  return token;
 }
 
 export const register = async (req, res) => {
@@ -27,6 +28,18 @@ export const register = async (req, res) => {
       password,
       fullName,
       contact,
+    });
+
+    const token = await sendTokenResponse(user);
+
+    res.status(201).json({
+      message: "user Registered successfully",
+      user: {
+        id: user._id,
+        email: user.email,
+        fullName: user.fullName,
+        contact: user.contact,
+      },
     });
   } catch (error) {
     console.log(error);
