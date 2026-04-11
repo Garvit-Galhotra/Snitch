@@ -2,12 +2,12 @@ import userModel from "../model/user.model.js";
 import jwt from "jsonwebtoken";
 import { Config } from "../config/config.js";
 
-async function sendTokenResponse(user, res, message) {``
+async function sendTokenResponse(user, res, message) {
   const token = jwt.sign(
     {
       id: user._id,
     },
-    Config.JWT_SECRET,
+    config.JWT_SECRET,
     {
       expiresIn: "7d",
     },
@@ -73,4 +73,10 @@ export const login = async (req, res) => {
   }
 
   await sendTokenResponse(user, res, "User logged in successfully");
+};
+
+export const googleCallback = async (req, res) => {
+  console.log(req.user);
+
+  res.redirect("http://localhost:5173/");
 };
