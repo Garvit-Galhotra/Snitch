@@ -2,10 +2,11 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import authRouter from "./routes/auth.routes.js";
+import productRouter from "./routes/product.routes.js";
 import cors from "cors";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { Config } from "./config/config.js";
+import { config } from "./config/config.js";
 
 const app = express();
 
@@ -26,8 +27,8 @@ app.use(passport.initialize());
 passport.use(
   new GoogleStrategy(
     {
-      clientID: Config.CLIENT_ID,
-      clientSecret: Config.CLIENT_SECRET,
+      clientID: config.CLIENT_ID,
+      clientSecret: config.CLIENT_SECRET,
       callbackURL: "/api/auth/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
@@ -41,5 +42,6 @@ app.get("/", (_req, res) => {
 });
 
 app.use("/api/auth", authRouter);
+app.use("/api/products", productRouter);
 
 export default app;
