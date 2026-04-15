@@ -28,8 +28,8 @@ if (!process.env.IMAGEKIT_PRIVATE_KEY) {
 export const config = {
   MONGO_URI: process.env.MONGO_URI,
   JWT_SECRET: process.env.JWT_SECRET,
-  CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-  CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  CLIENT_ID: process.env.CLIENT_ID,
+  CLIENT_SECRET: process.env.CLIENT_SECRET,
   NODE_ENV: process.env.NODE_ENV || "development",
   IMAGEKIT_PRIVATE_KEY: process.env.IMAGEKIT_PRIVATE_KEY,
 };
