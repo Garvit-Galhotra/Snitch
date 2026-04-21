@@ -1,13 +1,11 @@
 import { createBrowserRouter } from "react-router";
+import Register from "../features/auth/pages/Register";
+import Login from "../features/auth/pages/Login";
 
-import Register from "../feature/auth/pages/Register";
-import Login from "../feature/auth/pages/Login";
-import CreateProduct from "../feature/product/pages/CreateProducts";
-
-export const router = createBrowserRouter([
+export const routes = createBrowserRouter([
   {
     path: "/",
-    element: <h1>Hello world</h1>,
+    element: <h1>Home</h1>,
   },
   {
     path: "/register",
@@ -16,9 +14,5 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-  },
-  {
-    path: "/seller/create-product",
-    element: <CreateProduct />,
   },
 ]);
