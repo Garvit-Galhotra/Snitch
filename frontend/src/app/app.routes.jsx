@@ -15,4 +15,8 @@ export const routes = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+  {
+    path: "/seller/dashboard",
+    element: <h1>seller dashboard</h1>,
+  },
 ]);

@@ -15,8 +15,14 @@ const Login = () => {
     try {
       setIsLoading(true);
 
-      await handleLogin({ email, password });
-      navigate("/");
+      const user = await handleLogin({ email, password });
+      console.log(email, password, user, handleLogin);
+
+      if (user.role == "buyer") {
+        navigate("/");
+      } else if (user.role == "seller") {
+        navigate("/seller/dashboard");
+      }
     } catch (err) {
       console.log(err);
     } finally {

@@ -24,6 +24,10 @@ export const register = async ({
 
 export const login = async ({ email, password }) => {
   const response = await authApiInstance.post("/login", { email, password });
+  return response.data;
+};
 
+export const getMe = async () => {
+  const response = await authApiInstance.get("/get-me");
   return response.data;
 };

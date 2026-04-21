@@ -86,3 +86,19 @@ export const login = async (req, res) => {
     },
   });
 };
+
+export const getUser = async (req, res) => {
+  const user = req.user;
+
+  res.status(200).json({
+    message: "User Feteched Successfully",
+    success: true,
+    user: {
+      id: user._id,
+      email: user.email,
+      contact: user.contact,
+      username: user.username,
+      role: user.role,
+    },
+  });
+};
